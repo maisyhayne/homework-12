@@ -136,10 +136,6 @@ function update() {
     })
 }
 
-
-
-
-
 // ADD A DEPARTMENT DURING addTo()
 function addDepartment(){
     inquirer
@@ -162,25 +158,29 @@ function addDepartment(){
 // ADD A ROLE DURING addTo()
 function addRole(){
     inquirer
-    .prompt({
+    .prompt([
+        {
         name: "title",
         type: "input",
         message: "Enter new title"
     },
     {
         name: "salary",
-        type: "input",
+        type: "number",
         message: "Enter the salary"
-    })
+    }]
+    )
     .then(function(answer){
         connection.query("INSERT INTO roles SET ?",
-        {name: answer.department},
+        {
+            title: answer.title,
+            salary: answer.salary
+        },
         function(err){if(err) throw err;})
-        console.log(answer.department+" successfully added to departments");
+        console.log(answer.title+" successfully added to departments with a salary: "+answer.salary);
         start(); 
     })
 }
-
 
 // ADD AN EMPLOYEE DURING addTo()
 function addEmployee(){
@@ -223,7 +223,4 @@ function addEmployee(){
                 console.log(answer.department+" successfully added to departments");
                 start(); 
             })
-        }
-        
-    }
-    
+}
