@@ -62,7 +62,7 @@ function view() {
         }
     ])
     .then(function(answer) {
-        connection.query("SELECT * FROM ",answer.choice, function(err,result) {
+        connection.query("SELECT * FROM "+answer.choice, function(err,result) {
             if (err) throw err;
             console.table(result);
             start();
